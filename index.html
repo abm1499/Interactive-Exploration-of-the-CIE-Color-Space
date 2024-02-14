@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>XYZ App</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        align-items: center;
+        align-content: center;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="p5.js"></script>
+    <script src="script.js" defer></script>
+    <div class="header"><h1>CIE XYZ</h1></div>
+    <div class="row">
+      <div class="col">
+    <div class="controls">
+      <input class="chk" type="checkbox" id="btn-axis" checked> XYZ Axis </input>
+      <input class="chk" type="checkbox" id="btn-triangle"> Triangle </input>
+      <input class="chk" type="checkbox" id="btn-sides" > Sides </input>
+      <input class="chk" type="checkbox" id="btn-bottom" > Bottom </input>
+      <input class="chk" type="checkbox" id="btn-front" > Front </input>
+      <input class="chk" type="checkbox" id="btn-rgb" > RGB Cube </input>
+    </div>
+    <div class="rgb">
+      <label class="red">R</label>
+      <label>x:</label>
+      <input class="font" type="number" id="rx" step="0.01">
+      <label>y:</label>
+      <input class="font" type="number" id="ry" step="0.01">
+      <label>z:</label>
+      <input class="font" type="number" id="rz" step="0.01">
+    </div>
+    <div class="rgb">
+      <label class="green">G</label>
+      <label>x:</label>
+      <input class="font" type="number" id="gx" step="0.01">
+      <label>y:</label>
+      <input class="font" type="number" id="gy" step="0.01">
+      <label>z:</label>
+      <input class="font" type="number" id="gz" step="0.01">
+    </div>
+    <div class="rgb">
+      <label class="blue">B</label>
+      <label>x:</label>
+      <input class="font" type="number" id="bx" step="0.01">
+      <label>y:</label>
+      <input class="font" type="number" id="by" step="0.01">
+      <label>z:</label>
+      <input class="font" type="number" id="bz" step="0.01">
+    </div>
+    <div class="rgb">
+      <label style="margin-right: 2%;">K</label>
+      <label>x:</label>
+      <input class="font" type="number" id="kx" step="0.01">
+      <label>y:</label>
+      <input class="font" type="number" id="ky" step="0.01">
+      <label>z:</label>
+      <input class="font" type="number" id="kz" step="0.01">
+      </div>
+      <div class="rgb">
+      <button style="font-size: 1.5vh; border-radius: 30%; cursor: pointer;" id="updateRGB">Update RGB</button>
+      </div>
+    </div>
+    <div class="col">
+      <h2>Multiple choice questions</h2>
+    </div>
+      </div>
+    </div>
+  </body>
+</html>
