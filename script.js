@@ -69,6 +69,21 @@ let mcCurve = [
   [690, 0.0227, 0.00821, 0.0, 0.73439, 0.26561],
   [695, 0.01584, 0.005723, 0.0, 0.73459, 0.26541],
 ];
+// Define default values
+let defaultRGB = {
+  rx: 0.726,
+  ry: 0.266,
+  rz: 0.54,
+  gx: 0.155,
+  gy: 0.72,
+  gz: 0.2,
+  bx: 0.15,
+  by: 0.15,
+  bz: 1,
+  kx: 0.0,
+  ky: 0.0,
+  kz: 0.0,
+};
 
 function vtx(x, y, z) {
   // makes RHS from LHS or vice versa
@@ -263,12 +278,12 @@ document.getElementById("btn-rgb").addEventListener("change", function () {
   showRGB = this.checked;
 });
 
-let Rxy = [0.726, 0.266]; // XY values for pure red
-let R = [Rxy[0], Rxy[1], 1 - Rxy[0] - Rxy[1]];
-let Gxy = [0.075, 0.809]; // XY values for pure red
-let G = [Gxy[0], Gxy[1], 1 - Gxy[0] - Gxy[1]];
-let Bxy = [0.2, 0.02]; // XY values for pure red
-let B = [Bxy[0], Bxy[1], 1 - Bxy[0] - Bxy[1]];
+//let Rxy = [0.726, 0.266]; // XY values for pure red
+let R = [defaultRGB.rx, defaultRGB.ry, defaultRGB.rz];
+//let Gxy = [0.075, 0.809]; // XY values for pure red
+let G = [defaultRGB.gx, defaultRGB.gy, defaultRGB.gz];
+//let Bxy = [0.2, 0.02]; // XY values for pure red
+let B = [defaultRGB.bx, defaultRGB.by, defaultRGB.bz];
 let K = [0, 0, 0]; // XY values for black
 
 let r = K.map((val, index) => val + R[index]);
@@ -315,45 +330,41 @@ function drawRGB() {
   noStroke();
 }
 
-// Define default values
-let defaultRGB = {
-  rx: 0.726,
-  ry: 0.266,
-  gx: 0.155,
-  gy: 0.72,
-  bx: 0.15,
-  by: 0.15,
-  kx: 0.0,
-  ky: 0.0,
-  kz: 0.0,
-};
-
 // Function to update RGB values
 function updateRGBValues() {
-  Rxy = [
+  R = [
     parseFloat(document.getElementById("rx").value),
     parseFloat(document.getElementById("ry").value),
+    parseFloat(document.getElementById("rz").value),
   ];
-  R = [Rxy[0], Rxy[1], 1 - Rxy[0] - Rxy[1]];
-  Gxy = [
+  //R = [Rxy[0], Rxy[1], 1 - Rxy[0] - Rxy[1]];
+  G = [
     parseFloat(document.getElementById("gx").value),
     parseFloat(document.getElementById("gy").value),
+    parseFloat(document.getElementById("gz").value),
   ];
-  G = [Gxy[0], Gxy[1], 1 - Gxy[0] - Gxy[1]];
-  Bxy = [
+  //G = [Gxy[0], Gxy[1], 1 - Gxy[0] - Gxy[1]];
+  B = [
     parseFloat(document.getElementById("bx").value),
     parseFloat(document.getElementById("by").value),
+    parseFloat(document.getElementById("bz").value),
   ];
-  B = [Bxy[0], Bxy[1], 1 - Bxy[0] - Bxy[1]];
+  //B = [Bxy[0], Bxy[1], 1 - Bxy[0] - Bxy[1]];
+  K = [
+    parseFloat(document.getElementById("kx").value),
+    parseFloat(document.getElementById("ky").value),
+    parseFloat(document.getElementById("kz").value),
+  ];
+  //K = [Kxy[0], Kxy[1], 1 - Kxy[0] - Kxy[1]];
 
   // Update RGB values
-  r = K.map((val, index) => val + R[index]);
-  g = K.map((val, index) => val + G[index]);
-  b = K.map((val, index) => val + B[index]);
-  Y = K.map((val, index) => val + R[index] + G[index]);
-  M = K.map((val, index) => val + R[index] + B[index]);
-  C = K.map((val, index) => val + G[index] + B[index]);
-  W = K.map((val, index) => val + R[index] + G[index] + B[index]);
+  r = K.map((val, index) => R[index] - val);
+  g = K.map((val, index) => G[index] - val);
+  b = K.map((val, index) => B[index] - val);
+  Y = K.map((val, index) => val + r[index] + g[index]);
+  M = K.map((val, index) => val + r[index] + b[index]);
+  C = K.map((val, index) => val + g[index] + b[index]);
+  W = K.map((val, index) => val + r[index] + g[index] + b[index]);
 }
 
 // Function to reset RGB values to default
@@ -377,7 +388,8 @@ function resetRGBValues() {
 // Update RGB values when the button is clicked
 document.getElementById("updateRGB").addEventListener("click", updateRGBValues);
 
-// Call the reset function when the page loads
+// Call the reset function when the page loads and rest button is pressed
+document.getElementById("resetRGB").addEventListener("click", resetRGBValues);
 window.onload = resetRGBValues;
 
 function draw() {

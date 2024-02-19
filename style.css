@@ -5,13 +5,16 @@ body {
 .controls {
   display: flex;
   justify-content: center;
+  font-size: 20px;
+  margin-top: 15px;
 }
 
 .rgb {
   margin-top: 1%;
+  margin-bottom: 1%;
   display: flex;
   justify-content: center;
-  font-size: 1vh;
+  font-size: 20px;
 }
 
 .font {
@@ -22,29 +25,41 @@ body {
 .red {
   margin-right: 2%;
   color: red;
+  font-size: 30px;
 }
 
 .blue {
   margin-right: 2%;
   color: blue;
+  font-size: 30px;
 }
 
 .green {
   margin-right: 2%;
   color: green;
+  font-size: 30px;
 }
 
 .chk {
   margin-left: 1%;
   margin-right: 1%;
   cursor: pointer;
-  transform: scale(2);
+  transform: scale(1.5);
 }
 
 .header {
   width: 100%;
   text-align: center;
-  font-size: 26px;
+  position: relative;
+}
+
+.gradient-text {
+  overflow: hidden;
+  background-image: linear-gradient(to right, red, green, blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 74px;
 }
 
 .row {
@@ -57,4 +72,43 @@ body {
   border-radius: 35px;
   margin: 1%;
   text-align: center;
+}
+
+#quiz {
+  width: 400px;
+  padding: 20px;
+}
+
+.question {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+#optionForm label {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+#optionForm input[type="radio"] {
+  margin-right: 10px;
+}
+
+#result {
+  font-size: 28px;
+}
+
+.btn {
+  margin-top: 1%;
+  padding: 8px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
 }

@@ -16,11 +16,28 @@
         display: block;
       }
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const toggleButton = document.getElementById("toggleQuiz");
+        const quizContainer = document.getElementById("quiz");
+  
+        toggleButton.addEventListener("click", function() {
+          if (quizContainer.style.display === "none") {
+            quizContainer.style.display = "block";
+          } else {
+            quizContainer.style.display = "none";
+          }
+        });
+      });
+    </script>
   </head>
   <body>
     <script src="p5.js"></script>
     <script src="script.js" defer></script>
-    <div class="header"><h1>CIE XYZ</h1></div>
+    <div class="header"><span class="gradient-text">CIE XYZ</span><p style="font-size: 34px;">Learn about CIE Color Space!</p></div>
+    <div class="controls">
+      <button class="btn" id="toggleQuiz">Show/Hide Quiz</button>
+      </div>
     <div class="row">
       <div class="col">
     <div class="controls">
@@ -59,7 +76,7 @@
       <input class="font" type="number" id="bz" step="0.01">
     </div>
     <div class="rgb">
-      <label style="margin-right: 2%;">K</label>
+      <label style="margin-right: 2%; font-size: 30px;">K</label>
       <label>x:</label>
       <input class="font" type="number" id="kx" step="0.01">
       <label>y:</label>
@@ -68,11 +85,12 @@
       <input class="font" type="number" id="kz" step="0.01">
       </div>
       <div class="rgb">
-      <button style="font-size: 1.5vh; border-radius: 30%; cursor: pointer;" id="updateRGB">Update RGB</button>
+      <button class="btn" id="updateRGB">Update RGB</button>
+      <button class="btn" id="resetRGB">Reset RGB</button>
       </div>
     </div>
-    <div class="col">
-      <h2>Multiple choice questions</h2>
+    <div id="quiz" class="col">
+      <script src="quiz.js"></script>
     </div>
       </div>
     </div>
