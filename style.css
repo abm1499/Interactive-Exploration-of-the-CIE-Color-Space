@@ -84,6 +84,17 @@ body {
   margin-bottom: 20px;
 }
 
+.task {
+  padding: 1%;
+}
+
+#answerInput {
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
 #optionForm label {
   display: block;
   font-size: 22px;

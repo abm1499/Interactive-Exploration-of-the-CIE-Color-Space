@@ -30,22 +30,38 @@
         });
       });
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const toggleButton = document.getElementById("toggleTask");
+        const taskContainer = document.getElementById("task");
+  
+        toggleButton.addEventListener("click", function() {
+          if (taskContainer.style.display === "none") {
+            taskContainer.style.display = "block";
+          } else {
+            taskContainer.style.display = "none";
+          }
+        });
+      });
+    </script>
+        <script src="p5.js"></script>
+        <script src="script.js"></script>
   </head>
   <body>
-    <script src="p5.js"></script>
-    <script src="script.js" defer></script>
     <div class="header"><span class="gradient-text">CIE XYZ</span><p style="font-size: 34px;">Learn about CIE Color Space!</p></div>
     <div class="controls">
       <button class="btn" id="toggleQuiz">Show/Hide Quiz</button>
+      <button class="btn" id="toggleTask">Show/Hide Task</button>
       </div>
     <div class="row">
       <div class="col">
     <div class="controls">
       <input class="chk" type="checkbox" id="btn-axis" checked> XYZ Axis </input>
+      <input class="chk" type="checkbox" id="btn-xyz"> X=Y=Z </input>
       <input class="chk" type="checkbox" id="btn-triangle"> Triangle </input>
       <input class="chk" type="checkbox" id="btn-sides" > Sides </input>
       <input class="chk" type="checkbox" id="btn-bottom" > Bottom </input>
-      <input class="chk" type="checkbox" id="btn-front" > Front </input>
+      <input class="chk" type="checkbox" id="btn-front" > CIE </input>
       <input class="chk" type="checkbox" id="btn-rgb" > RGB Cube </input>
     </div>
     <div class="rgb">
@@ -92,6 +108,12 @@
     <div id="quiz" class="col">
       <script src="quiz.js"></script>
     </div>
+      </div>
+      <div class="row">
+        <div id="task" class="col">
+          <h3>Excercise/ Tasks:</h3>
+          <script src="tasks.js"></script>
+        </div>    
       </div>
     </div>
   </body>

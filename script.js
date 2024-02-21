@@ -104,6 +104,16 @@ function setup() {
   textAlign(CENTER, CENTER);
 }
 
+function xyzEqual() {
+  strokeWeight(sf / 100);
+  stroke(0, 0, 0);
+  beginShape(LINES);
+  vtx(0, 0, 0);
+  vtx(1, 1, 1);
+  endShape();
+  noStroke();
+}
+
 function drawAxis_XYZ() {
   // https://p5js.org/reference/#/p5/stroke
   strokeWeight(sf / 100);
@@ -255,9 +265,14 @@ let showSides = false;
 let showBottom = false;
 let showFront = false;
 let showRGB = false;
+let showXyzEqual = false;
 
 document.getElementById("btn-axis").addEventListener("change", function () {
   showAxis = this.checked;
+});
+
+document.getElementById("btn-xyz").addEventListener("change", function () {
+  showXyzEqual = this.checked;
 });
 
 document.getElementById("btn-triangle").addEventListener("change", function () {
@@ -277,6 +292,25 @@ document.getElementById("btn-front").addEventListener("change", function () {
 document.getElementById("btn-rgb").addEventListener("change", function () {
   showRGB = this.checked;
 });
+
+//event listeners to input fields to update the cube automatically
+document.getElementById("rx").addEventListener("input", updateCube);
+document.getElementById("ry").addEventListener("input", updateCube);
+document.getElementById("rz").addEventListener("input", updateCube);
+document.getElementById("gx").addEventListener("input", updateCube);
+document.getElementById("gy").addEventListener("input", updateCube);
+document.getElementById("gz").addEventListener("input", updateCube);
+document.getElementById("bx").addEventListener("input", updateCube);
+document.getElementById("by").addEventListener("input", updateCube);
+document.getElementById("bz").addEventListener("input", updateCube);
+document.getElementById("kx").addEventListener("input", updateCube);
+document.getElementById("ky").addEventListener("input", updateCube);
+document.getElementById("kz").addEventListener("input", updateCube);
+
+function updateCube() {
+  updateRGBValues();
+  redraw();
+}
 
 //let Rxy = [0.726, 0.266]; // XY values for pure red
 let R = [defaultRGB.rx, defaultRGB.ry, defaultRGB.rz];
@@ -409,6 +443,10 @@ function draw() {
 
   if (showAxis) {
     drawAxis_XYZ();
+  }
+
+  if (showXyzEqual) {
+    xyzEqual();
   }
 
   if (showTriangle) {
