@@ -59,7 +59,7 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-size: 74px;
+  font-size: 52px;
 }
 
 .row {
@@ -110,7 +110,7 @@ body {
 }
 
 .btn {
-  margin-top: 1%;
+  margin-top: 1px;
   padding: 8px 20px;
   background-color: #007bff;
   color: #fff;

@@ -436,7 +436,7 @@ function draw() {
 
   push();
 
-  translate(0, sf / 20, -sf * 2);
+  translate(0, -1000, -sf * 2);
   rotateX((xRotDeg / 180) * PI);
   rotateY((yRotDeg / 180) * PI);
   scale(1200);

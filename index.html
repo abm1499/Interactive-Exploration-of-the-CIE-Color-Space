@@ -16,105 +16,127 @@
         display: block;
       }
     </style>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const toggleButton = document.getElementById("toggleQuiz");
-        const quizContainer = document.getElementById("quiz");
-  
-        toggleButton.addEventListener("click", function() {
-          if (quizContainer.style.display === "none") {
-            quizContainer.style.display = "block";
-          } else {
-            quizContainer.style.display = "none";
-          }
-        });
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const toggleButton = document.getElementById("toggleTask");
-        const taskContainer = document.getElementById("task");
-  
-        toggleButton.addEventListener("click", function() {
-          if (taskContainer.style.display === "none") {
-            taskContainer.style.display = "block";
-          } else {
-            taskContainer.style.display = "none";
-          }
-        });
-      });
-    </script>
-        <script src="p5.js"></script>
-        <script src="script.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggleControlsButton = document.getElementById("toggleControls");
+    const controlsContainer = document.getElementById("controls");
+    const toggleExerciseButton = document.getElementById("toggleExcercise");
+    const exerciseContainer = document.getElementById("quiz");
+    const toggleAdvancedButton = document.getElementById("toggleAdvanced");
+    const modeButtonsContainer = document.querySelector(".controls");
+    const taskContainer = document.getElementById("task");
+
+    toggleControlsButton.addEventListener("click", function() {
+      if (controlsContainer.style.display === "none") {
+        controlsContainer.style.display = "block";
+        hideModeButtons();
+      } else {
+        controlsContainer.style.display = "none";
+      }
+    });
+
+    toggleExerciseButton.addEventListener("click", function() {
+      if (exerciseContainer.style.display === "none") {
+        exerciseContainer.style.display = "block";
+        taskContainer.style.display = "block";
+        hideModeButtons();
+      } else {
+        exerciseContainer.style.display = "none";
+        taskContainer.style.display = "none";
+      }
+    });
+
+    toggleAdvancedButton.addEventListener("click", function() {
+      if (controlsContainer.style.display === "none" && exerciseContainer.style.display === "none") {
+        controlsContainer.style.display = "block";
+        exerciseContainer.style.display = "block";
+        taskContainer.style.display = "block";
+        hideModeButtons();
+      } else {
+        controlsContainer.style.display = "none";
+        exerciseContainer.style.display = "none";
+        taskContainer.style.display = "none";
+      }
+    });
+
+    function hideModeButtons() {
+      modeButtonsContainer.style.display = "none";
+    }
+  });
+</script>
+
+
   </head>
   <body>
-    <div class="header"><span class="gradient-text">CIE XYZ</span><p style="font-size: 34px;">Learn about CIE Color Space!</p></div>
+    <script src="p5.js"></script>
+    <script src="script.js" defer></script>
+    <div class="header"><span class="gradient-text">CIE XYZ</span><p style="font-size: 24px;">Learn about CIE Color Space!</p></div>
     <div class="controls">
-      <button class="btn" id="toggleQuiz">Show/Hide Quiz</button>
-      <button class="btn" id="toggleTask">Show/Hide Task</button>
-      </div>
+      <button class="btn" id="toggleControls">Teaching Mode</button>
+      <button class="btn" id="toggleExcercise">Excercise Mode</button>
+      <button class="btn" id="toggleAdvanced">Advanced Mode</button>
+    </div>
     <div class="row">
-      <div class="col">
-    <div class="controls">
-      <input class="chk" type="checkbox" id="btn-axis" checked> XYZ Axis </input>
-      <input class="chk" type="checkbox" id="btn-xyz"> X=Y=Z </input>
-      <input class="chk" type="checkbox" id="btn-triangle"> Triangle </input>
-      <input class="chk" type="checkbox" id="btn-sides" > Sides </input>
-      <input class="chk" type="checkbox" id="btn-bottom" > Bottom </input>
-      <input class="chk" type="checkbox" id="btn-front" > CIE </input>
-      <input class="chk" type="checkbox" id="btn-rgb" > RGB Cube </input>
-    </div>
-    <div class="rgb">
-      <label class="red">R</label>
-      <label>x:</label>
-      <input class="font" type="number" id="rx" step="0.01">
-      <label>y:</label>
-      <input class="font" type="number" id="ry" step="0.01">
-      <label>z:</label>
-      <input class="font" type="number" id="rz" step="0.01">
-    </div>
-    <div class="rgb">
-      <label class="green">G</label>
-      <label>x:</label>
-      <input class="font" type="number" id="gx" step="0.01">
-      <label>y:</label>
-      <input class="font" type="number" id="gy" step="0.01">
-      <label>z:</label>
-      <input class="font" type="number" id="gz" step="0.01">
-    </div>
-    <div class="rgb">
-      <label class="blue">B</label>
-      <label>x:</label>
-      <input class="font" type="number" id="bx" step="0.01">
-      <label>y:</label>
-      <input class="font" type="number" id="by" step="0.01">
-      <label>z:</label>
-      <input class="font" type="number" id="bz" step="0.01">
-    </div>
-    <div class="rgb">
-      <label style="margin-right: 2%; font-size: 30px;">K</label>
-      <label>x:</label>
-      <input class="font" type="number" id="kx" step="0.01">
-      <label>y:</label>
-      <input class="font" type="number" id="ky" step="0.01">
-      <label>z:</label>
-      <input class="font" type="number" id="kz" step="0.01">
+      <div class="col" id="controls" style="display: none;">
+        <div class="controls">
+          <input class="chk" type="checkbox" id="btn-axis" checked> XYZ Axis </input>
+          <input class="chk" type="checkbox" id="btn-xyz"> X=Y=Z </input>
+          <input class="chk" type="checkbox" id="btn-triangle"> Triangle </input>
+          <input class="chk" type="checkbox" id="btn-sides" > Sides </input>
+          <input class="chk" type="checkbox" id="btn-bottom" > Bottom </input>
+          <input class="chk" type="checkbox" id="btn-front" > CIE </input>
+          <input class="chk" type="checkbox" id="btn-rgb" > RGB Cube </input>
+        </div>
+        <div class="rgb">
+          <label class="red">R</label>
+          <label>x:</label>
+          <input class="font" type="number" id="rx" step="0.01">
+          <label>y:</label>
+          <input class="font" type="number" id="ry" step="0.01">
+          <label>z:</label>
+          <input class="font" type="number" id="rz" step="0.01">
+        </div>
+        <div class="rgb">
+          <label class="green">G</label>
+          <label>x:</label>
+          <input class="font" type="number" id="gx" step="0.01">
+          <label>y:</label>
+          <input class="font" type="number" id="gy" step="0.01">
+          <label>z:</label>
+          <input class="font" type="number" id="gz" step="0.01">
+        </div>
+        <div class="rgb">
+          <label class="blue">B</label>
+          <label>x:</label>
+          <input class="font" type="number" id="bx" step="0.01">
+          <label>y:</label>
+          <input class="font" type="number" id="by" step="0.01">
+          <label>z:</label>
+          <input class="font" type="number" id="bz" step="0.01">
+        </div>
+        <div class="rgb">
+          <label style="margin-right: 2%; font-size: 30px;">K</label>
+          <label>x:</label>
+          <input class="font" type="number" id="kx" step="0.01">
+          <label>y:</label>
+          <input class="font" type="number" id="ky" step="0.01">
+          <label>z:</label>
+          <input class="font" type="number" id="kz" step="0.01">
+        </div>
+        <div class="rgb">
+          <button class="btn" id="updateRGB">Update RGB</button>
+          <button class="btn" id="resetRGB">Reset RGB</button>
+        </div>
       </div>
-      <div class="rgb">
-      <button class="btn" id="updateRGB">Update RGB</button>
-      <button class="btn" id="resetRGB">Reset RGB</button>
+      <div id="quiz" class="col" style="display: none;">
+        <script src="quiz.js"></script>
       </div>
     </div>
-    <div id="quiz" class="col">
-      <script src="quiz.js"></script>
-    </div>
-      </div>
-      <div class="row">
-        <div id="task" class="col">
-          <h3>Excercise/ Tasks:</h3>
-          <script src="tasks.js"></script>
-        </div>    
-      </div>
+    <div class="row">
+      <div id="task" class="col" style="display: none;">
+        <h3>Excercise/ Tasks:</h3>
+        <script src="tasks.js"></script>
+      </div>    
     </div>
   </body>
 </html>
