@@ -84,6 +84,153 @@ let defaultRGB = {
   ky: 0.0,
   kz: 0.0,
 };
+let defaultRGB2 = {
+  rx2: 0.726,
+  ry2: 0.266,
+  rz2: 0.54,
+  gx2: 0.155,
+  gy2: 0.72,
+  gz2: 0.2,
+  bx2: 0.15,
+  by2: 0.15,
+  bz2: 1,
+  kx2: 0.0,
+  ky2: 0.0,
+  kz2: 0.0,
+};
+
+//event listeners to input fields to update the cube automatically
+document.getElementById("rx2").addEventListener("input", updateCube2);
+document.getElementById("ry2").addEventListener("input", updateCube2);
+document.getElementById("rz2").addEventListener("input", updateCube2);
+document.getElementById("gx2").addEventListener("input", updateCube2);
+document.getElementById("gy2").addEventListener("input", updateCube2);
+document.getElementById("gz2").addEventListener("input", updateCube2);
+document.getElementById("bx2").addEventListener("input", updateCube2);
+document.getElementById("by2").addEventListener("input", updateCube2);
+document.getElementById("bz2").addEventListener("input", updateCube2);
+document.getElementById("kx2").addEventListener("input", updateCube2);
+document.getElementById("ky2").addEventListener("input", updateCube2);
+document.getElementById("kz2").addEventListener("input", updateCube2);
+
+function updateCube2() {
+  updateRGBValues2();
+  redraw();
+}
+
+//let Rxy = [0.726, 0.266]; // XY values for pure red
+let R2 = [defaultRGB2.rx2, defaultRGB2.ry2, defaultRGB2.rz2];
+//let Gxy = [0.075, 0.809]; // XY values for pure red
+let G2 = [defaultRGB2.gx2, defaultRGB2.gy2, defaultRGB2.gz2];
+//let Bxy = [0.2, 0.02]; // XY values for pure red
+let B2 = [defaultRGB2.bx2, defaultRGB2.by2, defaultRGB2.bz2];
+let K2 = [0, 0, 0]; // XY values for black
+
+let r2 = K2.map((val, index) => val + R2[index]);
+let g2 = K2.map((val, index) => val + G2[index]);
+let b2 = K2.map((val, index) => val + B2[index]);
+let Y2 = K2.map((val, index) => val + R2[index] + G2[index]);
+let M2 = K2.map((val, index) => val + R2[index] + B2[index]);
+let C2 = K2.map((val, index) => val + G2[index] + B2[index]);
+let W2 = K2.map((val, index) => val + R2[index] + G2[index] + B2[index]);
+
+function drawRGB2() {
+  strokeWeight(sf / 100);
+  stroke(0, 0, 0);
+  noFill();
+
+  let L = 1;
+  beginShape(LINES);
+  vtx(K2[0], K2[1], K2[2]);
+  vtx(R2[0], R2[1], R2[2]);
+  vtx(K2[0], K2[1], K2[2]);
+  vtx(G2[0], G2[1], G2[2]);
+  vtx(K2[0], K2[1], K2[2]);
+  vtx(B2[0], B2[1], B2[2]);
+  vtx(G2[0], G2[1], G2[2]);
+  vtx(Y2[0], Y2[1], Y2[2]);
+  vtx(Y2[0], Y2[1], Y2[2]);
+  vtx(R2[0], R2[1], R2[2]);
+  vtx(R2[0], R2[1], R2[2]);
+  vtx(M2[0], M2[1], M2[2]);
+  vtx(M2[0], M2[1], M2[2]);
+  vtx(B2[0], B2[1], B2[2]);
+  vtx(M2[0], M2[1], M2[2]);
+  vtx(W2[0], W2[1], W2[2]);
+  vtx(W2[0], W2[1], W2[2]);
+  vtx(Y2[0], Y2[1], Y2[2]);
+  vtx(B2[0], B2[1], B2[2]);
+  vtx(C2[0], C2[1], C2[2]);
+  vtx(C2[0], C2[1], C2[2]);
+  vtx(G2[0], G2[1], G2[2]);
+  vtx(C2[0], C2[1], C2[2]);
+  vtx(W2[0], W2[1], W2[2]);
+  endShape();
+  noStroke();
+}
+
+// Function to update RGB values
+function updateRGBValues2() {
+  R2 = [
+    parseFloat(document.getElementById("rx2").value),
+    parseFloat(document.getElementById("ry2").value),
+    parseFloat(document.getElementById("rz2").value),
+  ];
+  //R = [Rxy[0], Rxy[1], 1 - Rxy[0] - Rxy[1]];
+  G2 = [
+    parseFloat(document.getElementById("gx2").value),
+    parseFloat(document.getElementById("gy2").value),
+    parseFloat(document.getElementById("gz2").value),
+  ];
+  //G = [Gxy[0], Gxy[1], 1 - Gxy[0] - Gxy[1]];
+  B2 = [
+    parseFloat(document.getElementById("bx2").value),
+    parseFloat(document.getElementById("by2").value),
+    parseFloat(document.getElementById("bz2").value),
+  ];
+  //B = [Bxy[0], Bxy[1], 1 - Bxy[0] - Bxy[1]];
+  K2 = [
+    parseFloat(document.getElementById("kx2").value),
+    parseFloat(document.getElementById("ky2").value),
+    parseFloat(document.getElementById("kz2").value),
+  ];
+  //K = [Kxy[0], Kxy[1], 1 - Kxy[0] - Kxy[1]];
+
+  // Update RGB values
+  r2 = K2.map((val, index) => R2[index] - val);
+  g2 = K2.map((val, index) => G2[index] - val);
+  b2 = K2.map((val, index) => B2[index] - val);
+  Y2 = K2.map((val, index) => val + r2[index] + g2[index]);
+  M2 = K2.map((val, index) => val + r2[index] + b2[index]);
+  C2 = K2.map((val, index) => val + g2[index] + b2[index]);
+  W2 = K2.map((val, index) => val + r2[index] + g2[index] + b2[index]);
+}
+
+// Function to reset RGB values to default
+function resetRGBValues2() {
+  document.getElementById("rx2").value = defaultRGB2.rx2;
+  document.getElementById("ry2").value = defaultRGB2.ry2;
+  document.getElementById("rz2").value = R2[2];
+  document.getElementById("gx2").value = defaultRGB2.gx2;
+  document.getElementById("gy2").value = defaultRGB2.gy2;
+  document.getElementById("gz2").value = G2[2];
+  document.getElementById("bx2").value = defaultRGB2.bx2;
+  document.getElementById("by2").value = defaultRGB2.by2;
+  document.getElementById("bz2").value = B2[2];
+  document.getElementById("kx2").value = K2[0];
+  document.getElementById("ky2").value = K2[1];
+  document.getElementById("kz2").value = K2[2];
+
+  updateRGBValues2();
+}
+
+// Update RGB values when the button is clicked
+document
+  .getElementById("updateRGB2")
+  .addEventListener("click", updateRGBValues2);
+
+// Call the reset function when the page loads and rest button is pressed
+document.getElementById("resetRGB2").addEventListener("click", resetRGBValues2);
 
 function vtx(x, y, z) {
   // makes RHS from LHS or vice versa
@@ -224,7 +371,7 @@ function drawBottomFace() {
   endShape();
 }
 
-function r2(v) {
+function rr(v) {
   return ((v * 100 + 0.5) | 0) / 100;
 }
 
@@ -266,6 +413,7 @@ let showBottom = false;
 let showFront = false;
 let showRGB = false;
 let showXyzEqual = false;
+let showRGB2 = false;
 
 document.getElementById("btn-axis").addEventListener("change", function () {
   showAxis = this.checked;
@@ -291,6 +439,9 @@ document.getElementById("btn-front").addEventListener("change", function () {
 });
 document.getElementById("btn-rgb").addEventListener("change", function () {
   showRGB = this.checked;
+});
+document.getElementById("btn-2rgb").addEventListener("change", function () {
+  showRGB2 = this.checked;
 });
 
 //event listeners to input fields to update the cube automatically
@@ -424,7 +575,10 @@ document.getElementById("updateRGB").addEventListener("click", updateRGBValues);
 
 // Call the reset function when the page loads and rest button is pressed
 document.getElementById("resetRGB").addEventListener("click", resetRGBValues);
-window.onload = resetRGBValues;
+window.onload = function () {
+  resetRGBValues(); // For the first cube
+  resetRGBValues2(); // For the second cube
+};
 
 function draw() {
   background(1.0);
@@ -464,6 +618,9 @@ function draw() {
   }
   if (showRGB) {
     drawRGB();
+  }
+  if (showRGB2) {
+    drawRGB2();
   }
   pop();
 }

@@ -69,6 +69,21 @@ let mcCurve = [
   [690, 0.0227, 0.00821, 0.0, 0.73439, 0.26561],
   [695, 0.01584, 0.005723, 0.0, 0.73459, 0.26541],
 ];
+// Define default values
+let defaultRGB = {
+  rx2: 0.726,
+  ry2: 0.266,
+  rz2: 0.54,
+  gx2: 0.155,
+  gy2: 0.72,
+  gz2: 0.2,
+  bx2: 0.15,
+  by2: 0.15,
+  bz2: 1,
+  kx2: 0.0,
+  ky2: 0.0,
+  kz2: 0.0,
+};
 
 function vtx(x, y, z) {
   // makes RHS from LHS or vice versa
@@ -98,85 +113,54 @@ function drawAxis_XYZ() {
   let L = 1.3;
   beginShape(LINES);
   vtx(0, 0, 0);
-  vtx(-L, 0, 0); // x
+  vtx(L, 0, 0); // x
   vtx(0, 0, 0);
-  vtx(0, -L, 0); // x
+  vtx(0, L, 0); // y
   vtx(0, 0, 0);
-  vtx(0, 0, -L); // x
+  vtx(0, 0, L); // z
   endShape();
   noStroke();
 
   push();
   fill("#000000");
   push();
-  translate(-1.34, -0.03, 0);
+  translate(1.34, 0.03, 0);
   undoRot();
-  text("M", 0, 0); // note: we swapped X and z using VTX func to get RHS
+  text("z", 0, 0); // note: we swapped X and z using VTX func to get RHS
   pop();
   push();
-  translate(0, -1.4, 0);
+  translate(0, 1.4, 0);
   undoRot();
-  text("C", 0, 0);
+  text("y", 0, 0);
   pop();
   push();
-  translate(0, -0.03, -1.34);
+  translate(0, 0.03, 1.34);
   undoRot();
-  text("Y", 0, 0); // note: we swapped X and z using VTX func to get RHS
+  text("x", 0, 0); // note: we swapped X and z using VTX func to get RHS
   pop();
   pop();
 }
 
-let Rxy = [0.073, 0.499];
-let Gxy = [0.401, 0.15];
-let Bxy = [0.451, 0.451];
-let R = [Rxy[0], Rxy[1], 1 - Rxy[0] - Rxy[1]];
-let G = [Gxy[0], Gxy[1], 1 - Gxy[0] - Gxy[1]];
-let B = [Bxy[0], Bxy[1], 1 - Bxy[0] - Bxy[1]];
-let K = [0, 0, 0]; // XY values for black
+//event listeners to input fields to update the cube automatically
 
-let r = K.map((val, index) => val + R[index]);
-let g = K.map((val, index) => val + G[index]);
-let b = K.map((val, index) => val + B[index]);
-let Y = K.map((val, index) => val + R[index] + G[index]);
-let M = K.map((val, index) => val + R[index] + B[index]);
-let C = K.map((val, index) => val + G[index] + B[index]);
-let W = K.map((val, index) => val + R[index] + G[index] + B[index]);
-
-function drawCYAN() {
-  strokeWeight(sf / 100);
-  stroke(0, 0, 0);
-  noFill();
-
-  let L = 1;
-  beginShape(LINES);
-
-  vtx(-K[0], -K[1], -K[2]);
-  vtx(-R[0], -R[1], -R[2]);
-  vtx(-K[0], -K[1], -K[2]);
-  vtx(-G[0], -G[1], -G[2]);
-  vtx(-K[0], -K[1], -K[2]);
-  vtx(-B[0], -B[1], -B[2]);
-  vtx(-G[0], -G[1], -G[2]);
-  vtx(-Y[0], -Y[1], -Y[2]);
-  vtx(-Y[0], -Y[1], -Y[2]);
-  vtx(-R[0], -R[1], -R[2]);
-  vtx(-R[0], -R[1], -R[2]);
-  vtx(-M[0], -M[1], -M[2]);
-  vtx(-M[0], -M[1], -M[2]);
-  vtx(-B[0], -B[1], -B[2]);
-  vtx(-M[0], -M[1], -M[2]);
-  vtx(-W[0], -W[1], -W[2]);
-  vtx(-W[0], -W[1], -W[2]);
-  vtx(-Y[0], -Y[1], -Y[2]);
-  vtx(-B[0], -B[1], -B[2]);
-  vtx(-C[0], -C[1], -C[2]);
-  vtx(-C[0], -C[1], -C[2]);
-  vtx(-G[0], -G[1], -G[2]);
-  vtx(-C[0], -C[1], -C[2]);
-  vtx(-W[0], -W[1], -W[2]);
-  endShape();
-  noStroke();
+function updateCube() {
+  updateRGBValues();
+  redraw();
 }
+
+// Function to update RGB values
+
+// Function to reset RGB values to default
+
+// Update RGB values when the button is clicked
+document
+  .getElementById("updateRGB2")
+  .addEventListener("click", updateRGBValues);
+
+// Call the reset function when the page loads and rest button is pressed
+document.getElementById("resetRGB2").addEventListener("click", resetRGBValues);
+window.onload = resetRGBValues;
+
 function draw() {
   background(1.0);
 
@@ -187,11 +171,11 @@ function draw() {
 
   push();
 
-  translate(0, sf / 20, -sf * 2);
+  translate(0, -1000, -sf * 2);
   rotateX((xRotDeg / 180) * PI);
   rotateY((yRotDeg / 180) * PI);
   scale(1200);
   drawAxis_XYZ();
-  drawCYAN();
+  drawRGB();
   pop();
 }

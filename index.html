@@ -35,6 +35,17 @@
       }
     });
 
+    const secondRgbCheckbox = document.getElementById("btn-2rgb");
+    const secondRgbControls = document.getElementById("2rgb");
+
+    secondRgbCheckbox.addEventListener("change", function() {
+      if (this.checked) {
+        secondRgbControls.style.display = "block";
+      } else {
+        secondRgbControls.style.display = "none";
+      }
+    });
+
     toggleExerciseButton.addEventListener("click", function() {
       if (exerciseContainer.style.display === "none") {
         exerciseContainer.style.display = "block";
@@ -86,6 +97,7 @@
           <input class="chk" type="checkbox" id="btn-bottom" > Bottom </input>
           <input class="chk" type="checkbox" id="btn-front" > CIE </input>
           <input class="chk" type="checkbox" id="btn-rgb" > RGB Cube </input>
+          <input class="chk" type="checkbox" id="btn-2rgb" > Second RGB Cube </input>
         </div>
         <div class="rgb">
           <label class="red">R</label>
@@ -126,6 +138,48 @@
         <div class="rgb">
           <button class="btn" id="updateRGB">Update RGB</button>
           <button class="btn" id="resetRGB">Reset RGB</button>
+        </div>
+        <div id="2rgb" style="display: none;">
+          <div class="rgb">
+            <label class="red">R</label>
+            <label>x:</label>
+            <input class="font" type="number" id="rx2" step="0.01">
+            <label>y:</label>
+            <input class="font" type="number" id="ry2" step="0.01">
+            <label>z:</label>
+            <input class="font" type="number" id="rz2" step="0.01">
+          </div>
+          <div class="rgb">
+            <label class="green">G</label>
+            <label>x:</label>
+            <input class="font" type="number" id="gx2" step="0.01">
+            <label>y:</label>
+            <input class="font" type="number" id="gy2" step="0.01">
+            <label>z:</label>
+            <input class="font" type="number" id="gz2" step="0.01">
+          </div>
+          <div class="rgb">
+            <label class="blue">B</label>
+            <label>x:</label>
+            <input class="font" type="number" id="bx2" step="0.01">
+            <label>y:</label>
+            <input class="font" type="number" id="by2" step="0.01">
+            <label>z:</label>
+            <input class="font" type="number" id="bz2" step="0.01">
+          </div>
+          <div class="rgb">
+            <label style="margin-right: 2%; font-size: 30px;">K</label>
+            <label>x:</label>
+            <input class="font" type="number" id="kx2" step="0.01">
+            <label>y:</label>
+            <input class="font" type="number" id="ky2" step="0.01">
+            <label>z:</label>
+            <input class="font" type="number" id="kz2" step="0.01">
+          </div>
+          <div class="rgb">
+            <button class="btn" id="updateRGB2">Update RGB</button>
+            <button class="btn" id="resetRGB2">Reset RGB</button>
+          </div>
         </div>
       </div>
       <div id="quiz" class="col" style="display: none;">
